@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ScholarLedger | Study Material Registry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+    <header class="hero">
+      <p class="eyebrow">Peer-to-Peer Study Material Sharing Platform</p>
+      <h1>ScholarLedger</h1>
+      <p class="subtitle">
+        Anchor every note and revision on-chain to prove authenticity, attribution, and version history.
+      </p>
+      <div class="wallet-panel">
+        <input id="contractAddress" placeholder="Paste deployed contract address" />
+        <button id="connectWalletBtn">Connect Wallet</button>
+        <button id="switchNetworkBtn" class="ghost">Switch to Localhost 31337</button>
+      </div>
+      <p class="state">
+        Open this page in Chrome/Brave with MetaMask installed and connected to Hardhat Localhost.
+      </p>
+      <p id="walletState" class="state">Wallet: not connected</p>
+      <p id="actionStatus" class="state action-status">Ready.</p>
+    </header>
+
+    <main class="layout">
+      <section class="card">
+        <h2>1. Upload New Document</h2>
+        <form id="uploadForm">
+          <label>Subject</label>
+          <input id="uploadSubject" required placeholder="Computer Science" />
+          <label>Topic</label>
+          <input id="uploadTopic" required placeholder="Distributed Systems - Unit 2" />
+          <label>IPFS / Cloud URI (optional if you select a file)</label>
+          <input id="uploadUri" placeholder="ipfs://Qm..." />
+          <label>Pick File (backend will pin to real IPFS and generate URI)</label>
+          <input id="uploadFile" type="file" />
+          <label>Or paste precomputed hash (bytes32)</label>
+          <input id="uploadHash" placeholder="0x..." />
+          <button type="submit">Publish On-Chain</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>2. Upload Revision</h2>
+        <form id="revisionForm">
+          <label>Parent Document ID</label>
+          <input id="revisionParentId" required type="number" min="1" />
+          <label>Updated Topic</label>
+          <input id="revisionTopic" required placeholder="Unit 2 - corrected diagrams" />
+          <label>Updated URI (optional if you select a file)</label>
+          <input id="revisionUri" placeholder="ipfs://Qm..." />
+          <label>Pick Updated File (backend will pin to real IPFS and generate URI)</label>
+          <input id="revisionFile" type="file" />
+          <label>Or paste hash (bytes32)</label>
+          <input id="revisionHash" placeholder="0x..." />
+          <button type="submit">Push Revision</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>3. Browse by Subject</h2>
+        <form id="browseForm">
+          <input id="browseSubject" required placeholder="Biology" />
+          <button type="submit">Search</button>
+        </form>
+        <div id="browseResults" class="results"></div>
+      </section>
+
+      <section class="card">
+        <h2>4. Version History</h2>
+        <form id="historyForm">
+          <input id="historyDocumentId" type="number" min="1" required placeholder="Root or version document ID" />
+          <button type="submit">View History</button>
+        </form>
+        <div id="historyResults" class="results"></div>
+      </section>
+
+      <section class="card">
+        <h2>5. Verify Integrity</h2>
+        <form id="verifyForm">
+          <label>Document ID</label>
+          <input id="verifyDocumentId" type="number" min="1" required placeholder="1" />
+          <label>Select local file to hash</label>
+          <input id="verifyFile" type="file" />
+          <label>Or paste local hash (bytes32)</label>
+          <input id="verifyHash" placeholder="0x..." />
+          <button type="submit">Verify Against Chain</button>
+        </form>
+        <p id="verifyResult" class="state"></p>
+      </section>
+
+      <section class="card full">
+        <h2>Activity Log</h2>
+        <pre id="logPanel"></pre>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

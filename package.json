@@ -1,0 +1,30 @@
+{
+  "name": "blockchain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "node": "hardhat node",
+    "backend": "node backend/server.js",
+    "deploy:local": "hardhat ignition deploy ignition/modules/Counter.ts --network localhost",
+    "deploy:sepolia": "hardhat ignition deploy ignition/modules/Counter.ts --network sepolia",
+    "frontend": "npx serve frontend -l 5173"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hardhat": "^3.3.0"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ignition": "^3.1.1",
+    "@nomicfoundation/hardhat-toolbox-viem": "^5.0.3",
+    "@types/node": "^22.19.17",
+    "forge-std": "github:foundry-rs/forge-std#v1.9.4",
+    "typescript": "~5.8.0",
+    "viem": "^2.47.19"
+  }
+}
